@@ -82,7 +82,6 @@
                         <th scope="row">2</th>
 
                         <td><button class="btn btn-sm btn-primary">Delete</button></td>
-                        <td><button class="btn btn-sm btn-primary">Edit</button></td>
                     </tr>
 
 
@@ -130,7 +129,6 @@
                     <td>${element[0]}</td>
                     <td>${element[1]}</td> 
                     <td><button class="btn btn-sm btn-primary" onclick="deleted(${index})">Delete</button></td> 
-                    <td><button class="btn btn-sm btn-primary" onclick="edited(${index})">Edit</button></td> 
                     </tr>`;
             });
             tableBody.innerHTML = str;
@@ -150,24 +148,14 @@
 
         }
 
-        function editItem(itemIndex, newItemValue) {
+        function edited(itemIndex, newItemValue) {
             console.log("Edit", itemIndex, "with", newItemValue);
             itemJsonArrayStr = localStorage.getItem('itemsJson');
             itemJsonArray = JSON.parse(itemJsonArrayStr);
             // Edit the element at itemIndex with the new value
-            itemJsonArray[itemIndex] = newItemValue;
+            itemJsonArray.editElement(itemIndex, 0);
             localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
             update();
-        }
-
-        function clearStorage() {
-            if (confirm("Do you areally want to clear?")) {
-                console.log('Clearing the storage')
-                localStorage.clear();
-                ss
-                update()
-
-            }
         }
     </script>
 </body>
