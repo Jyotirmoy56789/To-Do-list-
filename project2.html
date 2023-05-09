@@ -14,7 +14,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">TODOs List</a>
+        <a class="navbar-brand" href="#">CRUD APP</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,9 +28,7 @@
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Items
-                    </a>
+
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Another action</a>
@@ -50,7 +48,7 @@
     </nav>
 
     <div class="container my-4">
-        <h2 class="text-center">TODOs List</h2>
+        <h2 class="text-center">CRUD APP</h2>
 
         <div class="form-group">
             <label for="title">Title</label>
@@ -81,19 +79,18 @@
                 </thead>
                 <tbody id="tableBody">
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Get some Coffee</td>
-                        <td>You need coffee as you are a coder</td>
+                        <th scope="row">2</th>
+
                         <td><button class="btn btn-sm btn-primary">Delete</button></td>
+                        <td><button class="btn btn-sm btn-primary">Edit</button></td>
                     </tr>
+
 
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
@@ -133,6 +130,7 @@
                     <td>${element[0]}</td>
                     <td>${element[1]}</td> 
                     <td><button class="btn btn-sm btn-primary" onclick="deleted(${index})">Delete</button></td> 
+                    <td><button class="btn btn-sm btn-primary" onclick="edited(${index})">Edit</button></td> 
                     </tr>`;
             });
             tableBody.innerHTML = str;
@@ -152,12 +150,23 @@
 
         }
 
+        function editItem(itemIndex, newItemValue) {
+            console.log("Edit", itemIndex, "with", newItemValue);
+            itemJsonArrayStr = localStorage.getItem('itemsJson');
+            itemJsonArray = JSON.parse(itemJsonArrayStr);
+            // Edit the element at itemIndex with the new value
+            itemJsonArray[itemIndex] = newItemValue;
+            localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+            update();
+        }
+
         function clearStorage() {
             if (confirm("Do you areally want to clear?")) {
                 console.log('Clearing the storage')
                 localStorage.clear();
                 ss
                 update()
+
             }
         }
     </script>
